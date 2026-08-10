@@ -1,1 +1,42 @@
+```mermaid
+erDiagram
+    DIM_STATE ||--o{ DIM_CUSTOMER : contains
+    DIM_EDUCATION ||--o{ DIM_CUSTOMER : classifies
+    DIM_GENDER ||--o{ DIM_CUSTOMER : classifies
+    DIM_CUSTOMER ||--o{ FACT_CUSTOMER_ACTIVITY : generates
 
+    DIM_STATE {
+        int state_id PK
+        varchar state_name UK
+    }
+
+    DIM_EDUCATION {
+        int education_id PK
+        varchar education_name UK
+    }
+
+    DIM_GENDER {
+        int gender_id PK
+        varchar gender_name UK
+    }
+
+    DIM_CUSTOMER {
+        varchar customer_id PK
+        varchar customer_name
+        int state_id FK
+        int education_id FK
+        int gender_id FK
+        int age
+        boolean married
+        int num_pets
+        date join_date
+    }
+
+    FACT_CUSTOMER_ACTIVITY {
+        bigint activity_id PK
+        varchar customer_id FK
+        date transaction_date
+        decimal monthly_spend
+        int days_since_last_interaction
+    }
+```
